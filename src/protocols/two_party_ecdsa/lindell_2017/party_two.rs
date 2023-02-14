@@ -78,6 +78,7 @@ pub struct Party2Private {
     x2: FE,
 }
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct PDLchallenge {
     pub c_tag: BigInt,
     pub c_tag_tag: BigInt,
@@ -249,9 +250,8 @@ impl Party2Private {
     pub fn to_mta_message_b(&self, ek: &EncryptionKey, ciphertext: &BigInt) -> (MessageB, FE) {
         let message_a = MessageA {
             c: ciphertext.clone(),
-            range_proofs: vec![],
         };
-        let (a, b, _, _) = MessageB::b(&self.x2, &ek, message_a, &[]).unwrap();
+        let (a, b, _, _) = MessageB::b(&self.x2, &ek, message_a);
         (a, b)
     }
 }
